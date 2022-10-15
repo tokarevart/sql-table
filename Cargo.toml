@@ -1,0 +1,12 @@
+[package]
+name = "table"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+[dependencies.inject]
+path = "inject"
+
+[dependencies]
+paste = "1.0"
