@@ -1,4 +1,7 @@
-use table::{foreign_key_name::ForeignKeyName, index_name::IndexName, table, TableColumn, Unquote};
+use sql_table::{
+    foreign_key_name::ForeignKeyName, index_name::IndexName, table, table::TableColumn,
+    table::Unquote,
+};
 
 table!(Person: "person" {
     Forename: "forename",

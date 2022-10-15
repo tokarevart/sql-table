@@ -1,5 +1,5 @@
 [package]
-name = "table"
+name = "sql-table"
 version = "0.1.0"
 edition = "2021"
 

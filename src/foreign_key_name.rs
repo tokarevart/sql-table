@@ -1,4 +1,4 @@
-use crate::{TableColumn, Unquote};
+use crate::table::{TableColumn, Unquote};
 
 pub trait ForeignKeyName: TableColumn {
     fn foreign_key_name<F: TableColumn>(&self, fcol: F) -> String {
