@@ -1,6 +1,6 @@
 use sql_table::{
-    foreign_key_name::ForeignKeyName, index_name::IndexName, table, table::TableColumn,
-    table::Unquote,
+    foreign_key_name::ForeignKeyName, index_name::IndexName, qualified::Qualified, table,
+    table::TableColumn, table::Unquote,
 };
 
 table!(Person: "person" {
@@ -74,5 +74,14 @@ fn index_name() {
     assert_eq!(
         PhoneNumber::index_name(&[PhoneNumber::DialingCode, PhoneNumber::Rest]),
         "`ix_phone number_dialing code_rest`"
+    );
+}
+
+#[test]
+fn qualified_name() {
+    assert_eq!(Person::Forename.qualified(), "person.forename");
+    assert_eq!(
+        PhoneNumber::DialingCode.qualified(),
+        "`phone number`.`dialing code`"
     );
 }
