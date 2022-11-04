@@ -15,68 +15,47 @@ impl std::fmt::Display for FortyTwo {
 }
 
 #[test]
+fn braces_outside_interpolation() {
+    assert_eq!(inject!("some {{ test }} text"), "some { test } text");
+}
+
+#[test]
 fn only_injected_value_depth_1() {
     let forty_two = FortyTwo { n: 42 };
-    assert_eq!(inject!("#{forty_two}"), "42");
-}
-
-#[test]
-fn only_injected_value_depth_1_front() {
-    let forty_two = FortyTwo { n: 42 };
-    assert_eq!(inject!(front: "%[", "%[forty_two}"), "42");
-}
-
-#[test]
-fn only_injected_value_depth_1_back() {
-    let forty_two = FortyTwo { n: 42 };
-    assert_eq!(inject!(back: "]%", "#{forty_two]%"), "42");
-}
-
-#[test]
-fn only_injected_value_depth_1_front_back() {
-    let forty_two = FortyTwo { n: 42 };
-    assert_eq!(inject!(front: "%[", back: "]%", "%[forty_two]%"), "42");
+    assert_eq!(inject!("#{forty_two}#"), "42");
 }
 
 #[test]
 fn depth_1() {
     let forty_two = FortyTwo { n: 42 };
-    assert_eq!(inject!("the answer is #{forty_two}!"), "the answer is 42!");
+    assert_eq!(inject!("the answer is #{forty_two}#!"), "the answer is 42!");
+}
+
+#[test]
+fn front_and_back_seqs_iterpolation() {
+    assert_eq!(
+        inject!("front sequence is #{'#'}##{'{'}# and back sequence is #{'}'}##{'#'}#!"),
+        "front sequence is #{ and back sequence is }#!"
+    );
+
+    // or
+
+    let (f, b) = ("#{", "}#");
+    assert_eq!(
+        inject!("front sequence is #{f}# and back sequence is #{b}#!"),
+        "front sequence is #{ and back sequence is }#!"
+    );
 }
 
 #[test]
 fn only_injected_value_depth_2() {
-    assert_eq!(inject!("#{FortyTwo { n: 42 }}"), "42");
+    assert_eq!(inject!("#{FortyTwo { n: 42 }}#"), "42");
 }
 
 #[test]
 fn depth_2() {
     assert_eq!(
-        inject!("the answer is #{FortyTwo { n: 42 }}!"),
-        "the answer is 42!"
-    );
-}
-
-#[test]
-fn depth_2_front() {
-    assert_eq!(
-        inject!(front: "%[", "the answer is %[FortyTwo { n: 42 }}!"),
-        "the answer is 42!"
-    );
-}
-
-#[test]
-fn depth_2_back() {
-    assert_eq!(
-        inject!(back: "]%", "the answer is #{FortyTwo { n: 42 }]%!"),
-        "the answer is 42!"
-    );
-}
-
-#[test]
-fn depth_2_front_back() {
-    assert_eq!(
-        inject!(front: "%[", back: "]%", "the answer is %[FortyTwo { n: 42 }]%!"),
+        inject!("the answer is #{FortyTwo { n: 42 }}#!"),
         "the answer is 42!"
     );
 }
