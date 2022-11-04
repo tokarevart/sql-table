@@ -4,7 +4,7 @@ use proc_macro::{TokenStream, TokenTree};
 /// The only argument is the interpolation string literal.
 ///
 /// Front and back sequence of characters of interpolation expression
-/// are "#{" and "}" respectively (without quotes).
+/// are "#{" and "}#" respectively (without quotes).
 #[proc_macro]
 pub fn inject(input: TokenStream) -> TokenStream {
     let mut it = input.into_iter();
