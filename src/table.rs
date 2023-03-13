@@ -31,7 +31,7 @@ macro_rules! table {
         }, quote: $q:literal $(,)?
     ) => {
 
-        paste::paste! {
+        sql_table::paste::paste! {
             #[derive(Debug, Clone, Copy)]
             pub struct $name;
 
