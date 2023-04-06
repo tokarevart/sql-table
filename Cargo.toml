@@ -12,8 +12,6 @@ readme = "README.md"
 
 [workspace]
 
-[dependencies.inject]
-path = "inject"
-
 [dependencies]
+inject = { version = "0.1", path = "inject" }
 paste = "1.0"
