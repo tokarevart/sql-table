@@ -6,7 +6,7 @@ license = "MIT"
 authors = ["Artem Tokarev <tokarev28.art@gmail.com>"]
 keywords = ["sql", "database", "proc-macro"]
 categories = ["database"]
-description = "Makes no-ORM querying of SQL databases less boilerplate and less hardcoded"
+description = "Makes no-ORM querying of SQL databases more concise"
 repository = "https://github.com/tokarevart/sql-table"
 readme = "README.md"
 

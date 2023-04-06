@@ -1,6 +1,6 @@
 # sql-table
 
-Makes no-ORM querying of SQL databases less boilerplate and less hardcoded.
+Makes no-ORM querying of SQL databases more concise.
 
 [![Cargo](https://img.shields.io/crates/v/sql-table.svg)](https://crates.io/crates/sql-table)
 [![Documentation](https://docs.rs/sql-table/badge.svg)](https://docs.rs/sql-table)
