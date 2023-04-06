@@ -1,5 +1,5 @@
 [package]
-name = "inject"
+name = "sql-table-inject"
 version = "0.1.0"
 edition = "2021"
 
