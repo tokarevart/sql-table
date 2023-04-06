@@ -2,6 +2,13 @@
 name = "sql-table-inject"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+authors = ["Artem Tokarev <tokarev28.art@gmail.com>"]
+keywords = ["sql", "database", "proc-macro"]
+categories = ["database"]
+description = "Contains `inject!` procedural macro for use in `sql-table` crate"
+repository = "https://github.com/tokarevart/sql-table/inject"
+readme = "README.md"
 
 [lib]
 proc-macro = true

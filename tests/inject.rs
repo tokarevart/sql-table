@@ -1,4 +1,4 @@
-use inject::inject;
+use sql_table_inject::inject;
 
 #[test]
 fn no_injection() {

@@ -13,5 +13,5 @@ readme = "README.md"
 [workspace]
 
 [dependencies]
-inject = { version = "0.1", path = "inject", package = "sql-table-inject" }
+sql-table-inject = { version = "0.1", path = "inject" }
 paste = "1.0"
