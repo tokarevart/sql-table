@@ -1,11 +1,15 @@
-use crate::table::{Iden, TableColumn, Unquote};
+use crate::table::{Iden, Table, TableColumn, Unquote};
 
 pub trait IndexName: Unquote + Iden {
     fn index_name<C>(cols: &[C]) -> String
     where
-        C: TableColumn + Unquote,
+        C: TableColumn,
     {
-        let q = C::QUOTE;
+        let q = if !C::QUOTE.is_empty() {
+            C::QUOTE
+        } else {
+            C::Table::QUOTE
+        };
         format!(
             "{q}ix_{}{}{q}",
             C::TABLE.unquoted(),
