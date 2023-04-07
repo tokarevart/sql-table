@@ -85,3 +85,8 @@ fn qualified_name() {
         "`phone number`.`dialing code`"
     );
 }
+
+#[test]
+fn unquoted_qualified_name() {
+    assert_eq!(PhoneNumber::Rest.unquoted().qualified(), "`phone number`.rest");
+}

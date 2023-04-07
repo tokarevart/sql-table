@@ -115,8 +115,8 @@ macro_rules! table {
             }
 
             impl sql_table::table::TableColumn for [<Unquoted $name Column>] {
-                type Table = [<Unquoted $name>];
-                const TABLE: [<Unquoted $name>] = [<Unquoted $name>];
+                type Table = [<$name>];
+                const TABLE: [<$name>] = [<$name>];
                 const QUOTE: &'static str = "";
             }
 
