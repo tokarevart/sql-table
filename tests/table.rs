@@ -1,6 +1,6 @@
 use sql_table::{
     foreign_key_name::ForeignKeyName, index_name::IndexName, qualified::Qualified, table,
-    table::TableColumn, table::Unquote,
+    table::Table, table::TableColumn, table::Unquote,
 };
 
 table!(Person: "person" {
@@ -87,6 +87,45 @@ fn qualified_name() {
 }
 
 #[test]
+fn unquoted_foreign_key_name() {
+    assert_eq!(
+        Person::Forename.foreign_key_name(<PhoneNumber as Table>::Unquoted::Rest),
+        "`fk_person_forename_phone number_rest`"
+    );
+    assert_eq!(
+        Person::Forename.foreign_key_name(PhoneNumber::Rest.unquoted()),
+        "`fk_person_forename_phone number_rest`"
+    );
+    assert_eq!(
+        Person::Forename.foreign_key_name(<PhoneNumber as Table>::Unquoted::Rest.unquoted()),
+        "fk_person_forename_phone number_rest"
+    );
+    assert_eq!(
+        PhoneNumber::DialingCode.foreign_key_name(Person::Forename),
+        "`fk_phone number_dialing code_person_forename`"
+    );
+    assert_eq!(
+        <PhoneNumber as Table>::Unquoted::DialingCode.foreign_key_name(Person::Forename),
+        "`fk_phone number_dialing code_person_forename`"
+    );
+    assert_eq!(
+        PhoneNumber::DialingCode
+            .unquoted()
+            .foreign_key_name(Person::Forename),
+        "`fk_phone number_dialing code_person_forename`"
+    );
+    assert_eq!(
+        <PhoneNumber as Table>::Unquoted::DialingCode
+            .unquoted()
+            .foreign_key_name(Person::Forename),
+        "fk_phone number_dialing code_person_forename"
+    );
+}
+
+#[test]
 fn unquoted_qualified_name() {
-    assert_eq!(PhoneNumber::Rest.unquoted().qualified(), "`phone number`.rest");
+    assert_eq!(
+        PhoneNumber::Rest.unquoted().qualified(),
+        "`phone number`.rest"
+    );
 }
