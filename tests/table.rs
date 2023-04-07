@@ -123,6 +123,24 @@ fn unquoted_foreign_key_name() {
 }
 
 #[test]
+fn unquoted_index_name() {
+    assert_eq!(
+        <PhoneNumber as Table>::Unquoted::index_name(&[
+            <PhoneNumber as Table>::Unquoted::DialingCode,
+            <PhoneNumber as Table>::Unquoted::Rest
+        ]),
+        "`ix_phone number_dialing code_rest`"
+    );
+    assert_eq!(
+        <PhoneNumber as Table>::Unquoted::index_name(&[
+            <PhoneNumber as Table>::Unquoted::DialingCode.unquoted(),
+            <PhoneNumber as Table>::Unquoted::Rest.unquoted()
+        ]),
+        "ix_phone number_dialing code_rest"
+    );
+}
+
+#[test]
 fn unquoted_qualified_name() {
     assert_eq!(
         PhoneNumber::Rest.unquoted().qualified(),
