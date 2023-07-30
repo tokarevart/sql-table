@@ -42,6 +42,7 @@ macro_rules! table {
             #[derive(Debug, Clone, Copy)]
             pub struct $name;
 
+            #[allow(non_upper_case_globals)]
             impl $name {
                 $(
                     const [<$col>]: [<$name Column>] = [<$name Column>]::$col;
@@ -79,6 +80,7 @@ macro_rules! table {
             #[derive(Debug, Clone, Copy)]
             pub struct [<Unquoted $name>];
 
+            #[allow(non_upper_case_globals)]
             impl [<Unquoted $name>] {
                 $(
                     const [<$col>]: [<Unquoted $name Column>] 
