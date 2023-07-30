@@ -1,7 +1,5 @@
-use std::fmt::Display;
-
-pub trait Iden: Display + Clone + Copy {}
-impl<T> Iden for T where T: Display + Clone + Copy {}
+pub trait Iden: core::fmt::Display + Clone + Copy {}
+impl<T> Iden for T where T: core::fmt::Display + Clone + Copy {}
 
 pub trait Table: Iden + Unquote {
     type Unquoted: Table;
@@ -49,8 +47,8 @@ macro_rules! table {
                 )+
             }
 
-            impl std::fmt::Display for $name {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            impl ::core::fmt::Display for $name {
+                fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     f.write_str(&format!("{}{}{}", $q, $table_name, $q))
                 }
             }
@@ -60,8 +58,8 @@ macro_rules! table {
                 $($col),+
             }
 
-            impl std::fmt::Display for [<$name Column>] {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            impl ::core::fmt::Display for [<$name Column>] {
+                fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     match self {
                         $(
                             Self::$col => f.write_str(&format!("{}{}{}", $q, $col_name, $q)),
@@ -88,8 +86,8 @@ macro_rules! table {
                 )+
             }
 
-            impl std::fmt::Display for [<Unquoted $name>] {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            impl ::core::fmt::Display for [<Unquoted $name>] {
+                fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     f.write_str($table_name)
                 }
             }
@@ -125,8 +123,8 @@ macro_rules! table {
                 $($col),+
             }
 
-            impl std::fmt::Display for [<$name UnquotedColumn>] {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            impl ::core::fmt::Display for [<$name UnquotedColumn>] {
+                fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     match self {
                         $(
                             Self::$col => f.write_str($col_name),
@@ -147,8 +145,8 @@ macro_rules! table {
                 $($col),+
             }
 
-            impl std::fmt::Display for [<Unquoted $name Column>] {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            impl ::core::fmt::Display for [<Unquoted $name Column>] {
+                fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     match self {
                         $(
                             Self::$col => f.write_str($col_name),
@@ -169,8 +167,8 @@ macro_rules! table {
                 $($col),+
             }
 
-            impl std::fmt::Display for [<Unquoted $name UnquotedColumn>] {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            impl ::core::fmt::Display for [<Unquoted $name UnquotedColumn>] {
+                fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
                     match self {
                         $(
                             Self::$col => f.write_str($col_name),
