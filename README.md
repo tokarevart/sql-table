@@ -10,7 +10,12 @@ Makes no-ORM querying of SQL databases more concise.
 
 Basic usage:
 
-```rust ignore
+```rust
+use sql_table::{
+    table, inject, 
+    ForeignKeyName, IndexName, Qualified, Table, TableColumn, Unquote,
+};
+
 table!(Person: "person" {
     Name: "name",
     Country: "country",
@@ -32,7 +37,12 @@ assert_eq!(
 
 If you need more sophisticated behaviour:
 
-```rust ignore
+```rust
+use sql_table::{
+    table, inject, 
+    ForeignKeyName, IndexName, Qualified, Table, TableColumn, Unquote,
+};
+
 // If you want a specific table identifiers to be displayed by default as quoted
 // just add `quote` parameter after table definition.
 table!(SimCard: "sim card" {
@@ -61,7 +71,7 @@ assert_eq!(
         SELECT `sim card`.`phone number`
         FROM `sim card`
         JOIN person ON person.name = `sim card`.owner
-        WHERE #{Person::Country.qualified()}# = 'United States'
+        WHERE person.country = 'United States'
     ")
 );
 
